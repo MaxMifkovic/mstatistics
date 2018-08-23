@@ -33,3 +33,34 @@ def mad(a):
 
     out = np.mean(np.absolute(a - np.mean(a)))
     return out
+
+def gaussian(a, mu=0, sigma=1):
+    """
+    Construct a Gaussian for a given range of values with a specified mean and
+    standard deviation.
+
+    Parameters
+    ----------
+    a : array_like
+        Input array
+    mu : float, optional
+        Mean value of Gaussian
+    sigma : float, optional
+        Standard deviation of Gaussian
+
+    Returns
+    -------
+    out : array_like
+        Gaussian array corresponding to input array
+
+    References
+    ----------
+    https://en.wikipedia.org/wiki/Normal_distribution
+
+    https://www.maa.org/sites/default/files/pdf/upload_library/22/
+    Allendoerfer/stahl96.pdf
+
+    """
+
+    out = np.exp(-1*(a - mu)**2 / (2*sigma**2)) / np.sqrt(2*np.pi*sigma**2)
+    return out
