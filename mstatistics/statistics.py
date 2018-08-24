@@ -100,7 +100,7 @@ def cdf(a, normalize=True):
     a = np.asarray(a)
     out = np.cumsum(a)
     if normalize == True:
-        out /= out[-1]
+        out = np.divide(out, out[-1])
     return out
 
 def nearest_index(a, value):
