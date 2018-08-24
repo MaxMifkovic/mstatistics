@@ -74,6 +74,8 @@ def cdf(a, normalize=True):
     ----------
     a : array_like
         Input distribution
+    normalize : boolean, optional
+        If True, the CDF will be normalized.
 
     Return
     ------
@@ -96,4 +98,90 @@ def cdf(a, normalize=True):
     out = np.cumsum(a)
     if normalize == True:
         out /= out[-1]
+    return out
+
+def nearest_index(a, value):
+    """
+    Find the index with the closest value to the specified value.
+
+    Parameters
+    ----------
+    a : array_like
+        Input array
+    value : float
+        Specified value
+
+    Returns
+    -------
+    out : int
+        The index of the input array with the closest value to value
+
+    References
+    ----------
+    https://stackoverflow.com/questions/2566412/find-nearest-value-in-numpy-array
+
+    """
+
+    out = (np.absolute(a - value)).argmin()
+    return out
+
+def probability(a, b, lower=None, upper=None, inclusive=True, normalized=False):
+    """
+    Calculate the probability of an area within a distribution given by the
+    lower and upper limits. By default, the area is inclusive of the given
+    limits and will check that the distribution is a PDF, meaning that the
+    total area sums to 1.
+
+    Parameters
+    ----------
+    a : array_like
+        Input positional values of distribution
+    b : array_like
+        Input distribution
+    lower : float, optional
+        The lower limit of the probability range in the distribution. If it is
+        not provided, then the lowermost value in `a` will be used.
+    upper : float, optional
+        The upper limit of the probability range in the distribution. If it is
+        not provided, then the uppermost value in `a` will be used.
+    inclusive : boolean, optional
+        If True, then the lower and upper limits are inclusive; if False, then
+        they are exclusive. True by default.
+    normalized : boolean, optional
+        If True, then the provided distribution is a PDF. If False, then the
+        distribution will be normalized to a PDF. False by default.
+
+    Returns
+    -------
+    out : float
+        The probability of the region within the lower and upper bounds in a
+        distribution.
+
+    References
+    ----------
+    https://en.wikipedia.org/wiki/Probability_density_function#Absolutely_continuous_univariate_distributions
+
+    """
+
+    # Sort a
+    a = np.sort(a)
+    
+    # Find lower and upper indices
+    lower_ind = int(np.argwhere(a == a[nearest_ind(a, lower)]))
+    upper_ind = int(np.argwhere(a == a[nearest_ind(a, upper)]))
+
+    if inclusize == False:
+        # If not inclusive and the current value at lower_ind or upper_ind is
+        # the inclusive value, then shift the index to the left or right.
+        if a[lower_ind] == lower:
+            lower_ind += 1
+        if a[upper_ind] == upper:
+            upper_ind -= 1
+
+    # Normalize the distribution
+    if normalized == False:
+        b /= np.sum(b)
+
+    # Calculate the probability
+    out = np.absolute(b[upper_ind] - b[lower_ind])
     return out
