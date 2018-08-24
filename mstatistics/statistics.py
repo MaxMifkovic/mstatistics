@@ -94,5 +94,6 @@ def cdf(a, normalize=True):
     """
 
     out = np.cumsum(a)
-    out /= out[-1]
+    if normalize == True:
+        out /= out[-1]
     return out
