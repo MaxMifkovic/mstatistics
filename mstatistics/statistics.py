@@ -64,3 +64,35 @@ def gaussian(a, mu=0, sigma=1):
 
     out = np.exp(-1*(a - mu)**2 / (2*sigma**2)) / np.sqrt(2*np.pi*sigma**2)
     return out
+
+def cdf(a, normalize=True):
+    """
+    Construct a Cumulative Distribution Function from a given distribution.
+    Normalizing the CDF will put it on a range from [0, 1].
+
+    Parameters
+    ----------
+    a : array_like
+        Input distribution
+
+    Return
+    ------
+    out : array_like
+        Cumulative distribution function
+
+    Notes
+    -----
+    The Cumulative Distribution Function is the integral of the Probability
+    Distribution Function. The area under the curve in a PDF should sum to 1.
+    By default this function will re-normalize, to verify that the maximum
+    value in the CDF is 1.
+
+    References
+    ----------
+    https://en.wikipedia.org/wiki/Cumulative_distribution_function
+
+    """
+
+    out = np.cumsum(a)
+    out /= out[-1]
+    return out
