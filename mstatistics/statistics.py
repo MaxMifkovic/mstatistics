@@ -31,6 +31,7 @@ def mad(a):
 
     """
 
+    a = np.asarray(a)
     out = np.mean(np.absolute(a - np.mean(a)))
     return out
 
@@ -62,6 +63,7 @@ def gaussian(a, mu=0, sigma=1):
 
     """
 
+    a = np.asarray(a)
     out = np.exp(-1*(a - mu)**2 / (2*sigma**2)) / np.sqrt(2*np.pi*sigma**2)
     return out
 
@@ -95,6 +97,7 @@ def cdf(a, normalize=True):
 
     """
 
+    a = np.asarray(a)
     out = np.cumsum(a)
     if normalize == True:
         out /= out[-1]
@@ -122,6 +125,7 @@ def nearest_index(a, value):
 
     """
 
+    a = np.asarray(a)
     out = (np.absolute(a - value)).argmin()
     return out
 
@@ -164,6 +168,7 @@ def probability(a, b, lower=None, upper=None, inclusive=True, normalized=False):
     """
 
     # Sort a
+    a = np.asarray(a)
     a = np.sort(a)
     
     # Find lower and upper indices
