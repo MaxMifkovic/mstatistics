@@ -185,3 +185,4 @@ def probability(a, b, lower=None, upper=None, inclusive=True, normalized=False):
     # Calculate the probability
     out = np.absolute(b[upper_ind] - b[lower_ind])
     return out
+
