@@ -191,3 +191,65 @@ def probability(a, b, lower=None, upper=None, inclusive=True, normalized=False):
     out = np.absolute(b[upper_ind] - b[lower_ind])
     return out
 
+def covariance(a):
+    """
+    Returns the covariance matrix of a matrix or list of vectors. Contains the
+    variances and covariances of the given vectors. The main diagonal is the
+    variances and the upper- and lower-triangles are the covariances.
+    
+    Parameters
+    ----------
+    a : array_like
+        If np.ndarray.shape == 2, then each column is treated as a separate
+        vector. If list or tuple of vectors, then each item is a vector.
+    
+    Returns
+    -------
+    out : array_like
+        A square matrix of shape [N, N], where N is the length of the list or
+        tuple input or the number of columns in if the input is a 2D NumPy
+        array. Contains the variances and covariances of the given
+        vectors. The main diagonal is the variances and the upper- and lower-
+        triangles are the covariances.
+    
+    References
+    ----------
+    http://stattrek.com/matrix-algebra/covariance-matrix.aspx
+    
+    https://en.wikipedia.org/wiki/Covariance_matrix
+    
+    """
+    
+    a = np.asarray(a).T
+    N = a.shape[0]
+    A = a - np.mean(a, axis=0)
+    return A.T@A/N
+
+def correlation(a):
+    """
+    Returns the correlation matrix of a matrix or list of vectors. The main
+    diagonal is the correlation of a vector with itself and should be 1. The
+    upper- and lower- triangles are the Pearson correlation coefficients.
+    
+    Parameters
+    ----------
+    a : array_like
+        If np.ndarray.shape == 2, then each column is treated as a separate
+        vector. If list or tuple of vectors, then each item is a vector.
+    
+    Returns
+    -------
+    out : array_like
+        A square matrix of shape [N, N], where N is the length of the list or
+        tuple input or the number of columns in if the input is a 2D NumPy
+        array. The main diagonal is the correlation of a vector with itself and
+        should be 1. The upper- and lower- triangles are the Pearson
+        correlation coefficients.
+        
+    """
+    # Source:
+    # https://en.wikipedia.org/wiki/Covariance_matrix#Correlation_matrix
+    cov = covariance(a)
+    diag = np.diag(np.diag(cov)**-0.5, 0)
+    return diag@cov@diag
+
