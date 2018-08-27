@@ -21,3 +21,22 @@ def test_nearest_index():
     assert nearest_index(np.arange(0, 5), 5) == 4
     assert nearest_index(np.arange(0, 5), 4) == 4
 
+def test_covariance():
+    assert np.all(covariance([np.arange(0, 5),
+                              np.arange(0, 5)]) == 2*np.ones([2, 2]))
+    assert np.all(covariance(np.array([np.arange(0, 5),
+                                       np.arange(0, 5)])) == 2*np.ones([2, 2]))
+    assert np.all(covariance([np.arange(0, 5),
+                              -1*np.arange(0, 5)]) == np.array([[2, -2],
+                                                                [-2, 2]]))
+
+def test_correlation():
+    assert np.allclose(correlation([np.arange(0, 5),
+                                    np.arange(0, 5)]), np.ones([2, 2]))
+    assert np.allclose(correlation(np.array([np.arange(0, 5),
+                                             np.arange(0, 5)])), \
+                       np.ones([2, 2]))
+    assert np.allclose(correlation([np.arange(0, 5),
+                                    -1*np.arange(0, 5)]), \
+                       np.array([[1, -1], [-1, 1]]))
+
