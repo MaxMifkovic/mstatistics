@@ -118,10 +118,10 @@ def anova_one():
 
     # Sum of squares is n*variance
     # Sum of squares between
-    ssb = (np.sum(
-    sum_y_sqrd = 
-    ssw = 
-    sst = 
+    #ssb = (np.sum(
+    #sum_y_sqrd = 
+    #ssw = 
+    #sst = 
 
     return
 
