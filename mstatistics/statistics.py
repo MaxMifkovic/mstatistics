@@ -253,3 +253,98 @@ def correlation(a):
     diag = np.diag(np.diag(cov)**-0.5, 0)
     return diag@cov@diag
 
+def anova_one():
+    """
+    One-way ANOVA test.
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
+    Notes
+    -----
+
+    References
+    ----------
+
+    """
+
+    print("One-way anova")
+    return
+
+def anova_two():
+    """
+    Two-way ANOVA test.
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
+    Notes
+    -----
+
+    References
+    ----------
+
+    """
+
+    print("Two-way anova")
+    return
+
+def anova_n():
+    """
+    N-way ANOVA test.
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
+    Notes
+    -----
+
+    References
+    ----------
+
+    """
+
+    print("N-way anova")
+    return
+
+def anova(a, method='n', **kwargs):
+    """
+    Wrapper function for ANOVA tests. The input is re-directed to a one-way,
+    two-way, or n-way ANOVA based on the provided method. By default, a n-way
+    ANOVA is performed (since it is the general case).
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
+    Notes
+    -----
+
+    References
+    ----------
+
+    """
+
+    if method.lower() == 'one':
+        out = anova_one()
+        return out
+    elif method.lower() == 'two':
+        out = anova_two()
+        return out
+    elif method.lower() == 'n':
+        out = anova_n()
+        return out
+    else:
+        raise LookupError('Method "{}" not found'.format(method))
+    return
