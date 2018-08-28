@@ -253,6 +253,26 @@ def correlation(a):
     diag = np.diag(np.diag(cov)**-0.5, 0)
     return diag@cov@diag
 
+def ss():
+    """
+    Sum of squares.
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+
+    Notes
+    -----
+
+    References
+    ----------
+
+    """
+    print("Sum of squares function")
+    return
+
 def anova_one():
     """
     One-way ANOVA test.
@@ -272,6 +292,27 @@ def anova_one():
     """
 
     print("One-way anova")
+    a = np.asarray(a)
+    n = a.shape[0]
+    k = a.shape[1]
+    N = n*k
+
+    # Degrees of freedom between
+    dfb = k - 1
+
+    # Degrees of freedom within
+    dfw = N - k
+
+    # Degrees of freedom total
+    dft = N - 1
+
+    # Sum of squares is n*variance
+    # Sum of squares between
+    ssb = (np.sum(
+    sum_y_sqrd = 
+    ssw = 
+    sst = 
+
     return
 
 def anova_two():
@@ -337,7 +378,7 @@ def anova(a, method='n', **kwargs):
     """
 
     if method.lower() == 'one':
-        out = anova_one()
+        out = anova_one(a)
         return out
     elif method.lower() == 'two':
         out = anova_two()
