@@ -1,7 +1,43 @@
 def hello_world():
     return ("Hello, World!")
 
-def ss():
+def sst(a):
+    """
+    Total sum of squares
+
+    Parameters
+    ----------
+    a : array_like
+        N-dimensional matrix for N-way ANOVA
+
+    Returns
+    -------
+    out : array_like
+        Total sum of squares
+
+    Notes
+    -----
+
+    SS_total = sum((Y - mean(Y))**2)
+
+    References
+    ----------
+    https://en.wikipedia.org/wiki/Total_sum_of_squares
+    http://statweb.stanford.edu/~susan/courses/s141/exanova.pdf
+    http://www.real-statistics.com/two-way-anova/anova-more-than-two-factors/
+
+    """
+
+    out = np.sum((a - np.mean(a))**2)
+    return out
+
+def ssb(a):
+    return
+
+def ssw(a):
+    return
+
+def ss(a, method='total'):
     """
     Sum of squares.
 
@@ -10,15 +46,41 @@ def ss():
 
     Returns
     -------
+    out : float
+        The sum of squares
 
     Notes
     -----
+    Sum of squares is the summation of the square of the differences between
+    a vector and the mean value.
+
+    SS = sum((Y - mean(Y))**2)
+
+    The objective in a least squares regression is minimizing the sum of
+    squares.
+    
+    There are different types of SS and different naming conventions, such as
+    the total SS (shown above), the SS within a group, the SS between groups,
+    the SS from interactions of groups, the explained SS, and the residual SS.
+
+    SS_total = sum((Y - mean(Y))**2)
+
+    SS_between = n * sum((mean(Y, axis=1) - mean(Y))**2)
 
     References
     ----------
 
     """
     print("Sum of squares function")
+
+    if method.lower() == 'total':
+        return sst()
+    elif method.lower() == 'between':
+        return ssb()
+    elif method.lower() == 'within':
+        return ssw()
+    else:
+        raise LookupError('Method "{}" not found'.format(method))
     return
 
 def anova_one():
