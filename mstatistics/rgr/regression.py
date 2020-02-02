@@ -71,7 +71,7 @@ def ssb(a: np.ndarray) -> np.ndarray:
 def ssw(a: np.ndarray) -> np.ndarray:
     return
 
-def ss(a: np.ndarray, method='total': str) -> np.ndarray:
+def ss(a: np.ndarray, method: str='total') -> np.ndarray:
     """
     Sum of squares.
 
@@ -200,7 +200,7 @@ def anova_n(a: np.ndarray) -> np.ndarray:
     print("N-way anova")
     return
 
-def anova(a: np.ndarray, method='n': str, **kwargs) -> np.ndarray:
+def anova(a: np.ndarray, method: str='n', **kwargs) -> np.ndarray:
     """
     Wrapper function for ANOVA tests. The input is re-directed to a one-way,
     two-way, or n-way ANOVA based on the provided method. By default, a n-way

@@ -32,7 +32,7 @@ def mad(a: np.ndarray) -> np.ndarray:
     out = np.mean(np.absolute(a - np.mean(a)))
     return out
 
-def gaussian(a: np.ndarray, mu=0: float, sigma=1: float) -> np.ndarray:
+def gaussian(a: np.ndarray, mu: float=0, sigma: float=1) -> np.ndarray:
     """
     Construct a Gaussian for a given range of values with a specified mean and
     standard deviation.
@@ -64,7 +64,7 @@ def gaussian(a: np.ndarray, mu=0: float, sigma=1: float) -> np.ndarray:
     out = np.exp(-1*(a - mu)**2 / (2*sigma**2)) / np.sqrt(2*np.pi*sigma**2)
     return out
 
-def cdf(a: np.ndarray, normalize=True: bool) -> np.ndarray:
+def cdf(a: np.ndarray, normalize: bool=True) -> np.ndarray:
     """
     Construct a Cumulative Distribution Function from a given distribution.
     Normalizing the CDF will put it on a range from [0, 1].
@@ -126,7 +126,7 @@ def nearest_index(a: np.ndarray, value: float) -> int:
     out = (np.absolute(a - value)).argmin()
     return out
 
-def probability(a: np.ndarray, b: np.ndarray, lower=None: float, upper=None: float, inclusive=True: bool, normalized=False: bool) -> float:
+def probability(a: np.ndarray, b: np.ndarray, lower: float=None, upper: float=None, inclusive: bool=True, normalized: bool=False) -> float:
     """
     Calculate the probability of an area within a distribution given by the
     lower and upper limits. By default, the area is inclusive of the given
