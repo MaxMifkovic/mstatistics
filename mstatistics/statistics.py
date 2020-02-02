@@ -8,10 +8,7 @@ mad(a)
 
 import numpy as np
 
-def hello_world():
-    return ("Hello, World!")
-
-def mad(a):
+def mad(a: np.ndarray) -> np.ndarray:
     """
     Compute the mean absolute deviation of an array or matrix.
 
@@ -35,7 +32,7 @@ def mad(a):
     out = np.mean(np.absolute(a - np.mean(a)))
     return out
 
-def gaussian(a, mu=0, sigma=1):
+def gaussian(a: np.ndarray, mu=0: float, sigma=1: float) -> np.ndarray:
     """
     Construct a Gaussian for a given range of values with a specified mean and
     standard deviation.
@@ -67,7 +64,7 @@ def gaussian(a, mu=0, sigma=1):
     out = np.exp(-1*(a - mu)**2 / (2*sigma**2)) / np.sqrt(2*np.pi*sigma**2)
     return out
 
-def cdf(a, normalize=True):
+def cdf(a: np.ndarray, normalize=True: bool) -> np.ndarray:
     """
     Construct a Cumulative Distribution Function from a given distribution.
     Normalizing the CDF will put it on a range from [0, 1].
@@ -103,7 +100,7 @@ def cdf(a, normalize=True):
         out = np.divide(out, out[-1])
     return out
 
-def nearest_index(a, value):
+def nearest_index(a: np.ndarray, value: float) -> int:
     """
     Find the index with the closest value to the specified value.
 
@@ -129,7 +126,7 @@ def nearest_index(a, value):
     out = (np.absolute(a - value)).argmin()
     return out
 
-def probability(a, b, lower=None, upper=None, inclusive=True, normalized=False):
+def probability(a: np.ndarray, b: np.ndarray, lower=None: float, upper=None: float, inclusive=True: bool, normalized=False: bool) -> float:
     """
     Calculate the probability of an area within a distribution given by the
     lower and upper limits. By default, the area is inclusive of the given
@@ -191,7 +188,7 @@ def probability(a, b, lower=None, upper=None, inclusive=True, normalized=False):
     out = np.absolute(b[upper_ind] - b[lower_ind])
     return out
 
-def covariance(a):
+def covariance(a: np.ndarray) -> np.ndarray:
     """
     Returns the covariance matrix of a matrix or list of vectors. Contains the
     variances and covariances of the given vectors. The main diagonal is the
@@ -225,7 +222,7 @@ def covariance(a):
     A = a - np.mean(a, axis=0)
     return A.T@A/N
 
-def correlation(a):
+def correlation(a: np.ndarray) -> np.ndarray:
     """
     Returns the correlation matrix of a matrix or list of vectors. The main
     diagonal is the correlation of a vector with itself and should be 1. The

@@ -1,14 +1,21 @@
-def hello_world():
-    return ("Hello, World!")
+"""
+Regression
 
-def sst(a):
+Routines in this module:
+
+sst(a)
+"""
+
+import numpy as np
+
+def sst(a: np.ndarray) -> np.ndarray:
     """
     Total sum of squares
 
     Parameters
     ----------
     a : array_like
-        N-dimensional matrix for N-way ANOVA
+        N-dimensional matrix
 
     Returns
     -------
@@ -22,22 +29,49 @@ def sst(a):
 
     References
     ----------
+
     https://en.wikipedia.org/wiki/Total_sum_of_squares
     http://statweb.stanford.edu/~susan/courses/s141/exanova.pdf
     http://www.real-statistics.com/two-way-anova/anova-more-than-two-factors/
 
     """
 
+    a = np.asarray(a)
     out = np.sum((a - np.mean(a))**2)
     return out
 
-def ssb(a):
+def ssb(a: np.ndarray) -> np.ndarray:
+    """
+    Sum of squares between groups
+
+    Parameters
+    ----------
+    a : array_like
+        N-dimensional matrix
+
+    Returns
+    -------
+    out : array_like
+        Sum of squares between groups
+
+    Notes
+    -----
+
+    SS_between = n * sum((mean(Y, axis=1) - mean(Y))**2)
+
+    References
+    ----------
+
+    """
+
+    a = np.asarray(a)
+    out = a.size * np.sum(np.mean(a, axis=1) - np.mean(a))**2 # should n be a.size or a.shape[1]?
+    return out
+
+def ssw(a: np.ndarray) -> np.ndarray:
     return
 
-def ssw(a):
-    return
-
-def ss(a, method='total'):
+def ss(a: np.ndarray, method='total': str) -> np.ndarray:
     """
     Sum of squares.
 
@@ -71,19 +105,18 @@ def ss(a, method='total'):
     ----------
 
     """
-    print("Sum of squares function")
 
     if method.lower() == 'total':
-        return sst()
+        return sst(a)
     elif method.lower() == 'between':
-        return ssb()
+        return ssb(a)
     elif method.lower() == 'within':
-        return ssw()
+        return ssw(a)
     else:
-        raise LookupError('Method "{}" not found'.format(method))
+        raise LookupError(f'Method "{method}" not found')
     return
 
-def anova_one():
+def anova_one(a: np.ndarray) -> np.ndarray:
     """
     One-way ANOVA test.
 
@@ -125,7 +158,7 @@ def anova_one():
 
     return
 
-def anova_two():
+def anova_two(a: np.ndarray) -> np.ndarray:
     """
     Two-way ANOVA test.
 
@@ -146,7 +179,7 @@ def anova_two():
     print("Two-way anova")
     return
 
-def anova_n():
+def anova_n(a: np.ndarray) -> np.ndarray:
     """
     N-way ANOVA test.
 
@@ -167,7 +200,7 @@ def anova_n():
     print("N-way anova")
     return
 
-def anova(a, method='n', **kwargs):
+def anova(a: np.ndarray, method='n': str, **kwargs) -> np.ndarray:
     """
     Wrapper function for ANOVA tests. The input is re-directed to a one-way,
     two-way, or n-way ANOVA based on the provided method. By default, a n-way
@@ -187,14 +220,15 @@ def anova(a, method='n', **kwargs):
 
     """
 
+    a = np.asarray(a)
     if method.lower() == 'one':
         out = anova_one(a)
         return out
     elif method.lower() == 'two':
-        out = anova_two()
+        out = anova_two(a)
         return out
     elif method.lower() == 'n':
-        out = anova_n()
+        out = anova_n(a)
         return out
     else:
         raise LookupError('Method "{}" not found'.format(method))
