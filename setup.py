@@ -4,8 +4,8 @@ with open('README.md') as f:
     long_description = f.read()
 
 setup(name='mstatistics',
-      #version='0.1.1b11',
-      version='0.1.2.post1',
+      version='0.1.1b12',
+      #version='0.1.2.post1',
       description='Provide a robust statistical library for Python to be used in conjunction with NumPy, SciPy, Pandas, and other common data science packages.',
       long_description=long_description,
       long_description_content_type='text/markdown',

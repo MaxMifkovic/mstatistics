@@ -3,7 +3,16 @@ Statistics
 
 Routines in this module:
 
-mad(a)
+mad(a: np.ndarray) -> np.ndarray
+--------------------------------
+Compute the mean absolute deviation of an array or matrix
+
+gaussian(a: np.ndarray, mu: float=0, sigma: float=1) -> np.ndarray
+----------------------------------------------------------------------
+Construct a Gaussian for a given range of values with a specified mean and
+standard deviation.
+
+
 """
 
 import numpy as np
@@ -169,10 +178,10 @@ def probability(a: np.ndarray, b: np.ndarray, lower: float=None, upper: float=No
     a = np.sort(a)
     
     # Find lower and upper indices
-    lower_ind = int(np.argwhere(a == a[nearest_ind(a, lower)]))
-    upper_ind = int(np.argwhere(a == a[nearest_ind(a, upper)]))
+    lower_ind = int(np.argwhere(a == a[nearest_index(a, lower)])) if lower is not None else 0
+    upper_ind = int(np.argwhere(a == a[nearest_index(a, upper)])) if upper is not None else -1
 
-    if inclusize == False:
+    if inclusive == False:
         # If not inclusive and the current value at lower_ind or upper_ind is
         # the inclusive value, then shift the index to the left or right.
         if a[lower_ind] == lower:
@@ -220,7 +229,7 @@ def covariance(a: np.ndarray) -> np.ndarray:
     a = np.asarray(a).T
     N = a.shape[0]
     A = a - np.mean(a, axis=0)
-    return A.T@A/N
+    return A.T @ A / N
 
 def correlation(a: np.ndarray) -> np.ndarray:
     """
@@ -242,11 +251,13 @@ def correlation(a: np.ndarray) -> np.ndarray:
         array. The main diagonal is the correlation of a vector with itself and
         should be 1. The upper- and lower- triangles are the Pearson
         correlation coefficients.
+    
+    References
+    ----------
+    https://en.wikipedia.org/wiki/Covariance_matrix#Correlation_matrix
         
     """
-    # Source:
-    # https://en.wikipedia.org/wiki/Covariance_matrix#Correlation_matrix
+
     cov = covariance(a)
     diag = np.diag(np.diag(cov)**-0.5, 0)
-    return diag@cov@diag
-
+    return diag @ cov @ diag
